@@ -20,6 +20,14 @@ def map_text(state_name,position):
 
 while SCORE!=len(states_list):
     answer_state=screen.textinput(title=f"{SCORE}/50 States Correct",prompt="What is another state's name?").title()
+    if answer_state=="Exit":
+        missing_states=[]
+        for state in states_list:
+            if state not in CORRECT_GUESSES:
+                missing_states.append(state)
+        new_data=pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn.csv")
+        break
     if answer_state in states_list:
         if answer_state in CORRECT_GUESSES:
             pass
